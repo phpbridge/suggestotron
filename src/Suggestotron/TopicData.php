@@ -11,7 +11,7 @@ class TopicData {
 
     public function connect()
     {
-        $this->connection = new PDO("mysql:host=localhost;dbname=suggestotron", "root", "root");
+        $this->connection = new \PDO("mysql:host=localhost;dbname=suggestotron", "root", "root");
     }
 
     public function getAllTopics()
