@@ -16,8 +16,8 @@ foreach ($topics as $topic) {
             </div>
             <div class="col-xs-4">
                 <p class="pull-right">
-                    <a href="/edit?id=<?=$topic['id']; ?>" class="btn btn-primary">Edit</a>
-                    <a href="/delete?id=<?=$topic['id']; ?>" class="btn btn-danger" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-title="Are you sure?" data-content=" This cannot be undone!">Delete</a>
+                    <a href="/topic/edit/<?=$topic['id']; ?>" class="btn btn-primary">Edit</a>
+                    <a href="/topic/delete/<?=$topic['id']; ?>" class="btn btn-danger" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-title="Are you sure?" data-content=" This cannot be undone!">Delete</a>
                 </p>
             </div>
         </div>

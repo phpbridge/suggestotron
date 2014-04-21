@@ -1,25 +1,22 @@
 <?php
 namespace Suggestotron\Controller;
 
-class Topics {
+class Topics  extends \Suggestotron\Controller {
     protected $data;
-    protected $template;
-    protected $config;
     
     public function __construct()
     {
-        $this->config = \Suggestotron\Config::get('site');
+        parent::__construct();
         $this->data = new \Suggestotron\TopicData();
-        $this->template = new \Suggestotron\Template($this->config['view_path'] . "/base.phtml");
     }
 
-    public function listAction() {
+    public function listAction($options) {
         $topics = $this->data->getAllTopics();
 
         $this->render("index/list.phtml", ['topics' => $topics]);
     }
 
-    public function addAction()
+    public function addAction($options)
     {
         if (isset($_POST) && sizeof($_POST) > 0) {
             $this->data->add($_POST);
@@ -30,23 +27,23 @@ class Topics {
         $this->render("index/add.phtml");
     }
 
-    public function editAction()
+    public function editAction($options)
     {
         if (isset($_POST['id']) && !empty($_POST['id'])) {
             if ($this->data->update($_POST)) {
-                header("Location: /index.php");
+                header("Location: /");
                 exit;
             } else {
                 echo "An error occurred";
             }
         }
 
-        if (!isset($_GET['id']) || empty($_GET['id'])) {
+        if (!isset($options['id']) || empty($options['id'])) {
             echo "You did not pass in an ID.";
             exit;
         }
 
-        $topic = $this->data->getTopic($_GET['id']);
+        $topic = $this->data->getTopic($options['id']);
 
         if ($topic === false) {
             echo "Topic not found!";
@@ -56,31 +53,26 @@ class Topics {
         $this->render("index/edit.phtml", ['topic' => $topic]);
     }
 
-    public function deleteAction()
+    public function deleteAction($options)
     {
-        if (!isset($_GET['id']) || empty($_GET['id'])) {
+        if (!isset($options['id']) || empty($options['id'])) {
             echo "You did not pass in an ID.";
             exit;
         }
 
-        $topic = $this->data->getTopic($_GET['id']);
+        $topic = $this->data->getTopic($options['id']);
 
         if ($topic === false) {
             echo "Topic not found!";
             exit;
         }
 
-        if ($this->data->delete($_GET['id'])) {
-            header("Location: /index.php");
+        if ($this->data->delete($options['id'])) {
+            header("Location: /");
             exit;
         } else {
             echo "An error occurred";
         }
-    }
-
-    protected function render($template, $data = array())
-    {
-        $this->template->render($this->config['view_path'] . "/" . $template, $data);
     }
 }
 ?>

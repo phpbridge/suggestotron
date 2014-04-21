@@ -5,9 +5,8 @@ require_once '../src/Suggestotron/Config.php';
 $config = \Suggestotron\Config::get('autoload');
 require_once $config['class_path'] . '/Suggestotron/Autoloader.php';
 
-if (!isset($_SERVER['PATH_INFO']) || empty($_SERVER['PATH_INFO']) || $_SERVER['PATH_INFO'] == '/') {
-    $route = 'list';
-} else {
+$route = null;
+if (isset($_SERVER['PATH_INFO'])) {
     $route = $_SERVER['PATH_INFO'];
 }
 
