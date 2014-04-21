@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Suggestotron</title>
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <script type="text/javascript" src="/js/jquery-2.1.0.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                    <div class="navbar-header">
+                              <a class="navbar-brand" href="/">Suggestotron</a>
+                    </div>
+                    <form class="navbar-form navbar-right" role="search">
+                            <a href="/add.php" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-plus-sign"></span>
+                                        Add Topic
+                            </a>
+                        </form>
+                  </div>
+        </nav>
+        <div class="container">
+            <!-- Specific Page Content Goes Here -->
+            <?php $this->content(); ?>
+        </div>
+        <script type="text/javascript">
+            $('[data-toggle="popover"]').popover();
+        </script>
+    </body>
+</html>
