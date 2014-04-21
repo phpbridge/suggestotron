@@ -1,12 +1,12 @@
 <?php
-require 'TopicData.php';
+require_once '../src/Suggestotron/TopicData.php';
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo "You did not pass in an ID.";
     exit;
 }
 
-$data = new TopicData();
+$data = new \Suggestotron\TopicData();
 $topic = $data->getTopic($_GET['id']);
 
 if ($topic === false) {

@@ -30,7 +30,7 @@ class TopicData {
 		$values = [':id' => $id];
 		$query->execute($values);
 
-		return $query->fetch(PDO::FETCH_ASSOC);
+		return $query->fetch(\PDO::FETCH_ASSOC);
 	}
 
 	public function add($data)
