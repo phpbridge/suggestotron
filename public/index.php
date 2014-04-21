@@ -11,5 +11,9 @@ foreach ($topics as $topic) {
     echo "<p>";
     echo nl2br($topic['description']);
     echo "</p>";
-    echo "<p><a href='/edit.php?id=" .$topic['id']. "'>Edit</a></p>";
+    echo "<p>";
+    echo "<a href='/edit.php?id=" .$topic['id']. "'>Edit</a>";
+    echo " | ";
+    echo "<a href='/delete.php?id=" .$topic['id']. "'>Delete</a>";
+    echo "</p>";
 }

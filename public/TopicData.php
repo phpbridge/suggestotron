@@ -70,5 +70,19 @@ class TopicData {
 
 	    return $query->execute($data);
 	}
+
+	public function delete($id) {
+	    $query = $this->connection->prepare(
+	        "DELETE FROM topics
+	            WHERE
+	                id = :id"
+	    );
+
+	    $data = [
+	        ':id' => $id,
+	    ];
+
+	    return $query->execute($data);
+	}
 }
 ?>
