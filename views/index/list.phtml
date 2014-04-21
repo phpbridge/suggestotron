@@ -16,6 +16,11 @@ foreach ($topics as $topic) {
             </div>
             <div class="col-xs-4">
                 <p class="pull-right">
+                    <a href="/vote/add/<?=$topic['id']; ?>" class="btn btn-success">
+                        <span class="glyphicon glyphicon-thumbs-up">
+                            <strong><?=(isset($topic['count'])) ? $topic['count'] : 0;?></strong>
+                        </span>
+                    </a>
                     <a href="/topic/edit/<?=$topic['id']; ?>" class="btn btn-primary">Edit</a>
                     <a href="/topic/delete/<?=$topic['id']; ?>" class="btn btn-danger" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-title="Are you sure?" data-content=" This cannot be undone!">Delete</a>
                 </p>

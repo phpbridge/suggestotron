@@ -4,13 +4,20 @@ namespace Suggestotron\Model;
 class Topics {
     protected $connection;
 	
-    public function getAllTopics()
-    {
-        $query = \Suggestotron\Db::getInstance()->prepare("SELECT * FROM topics");
-        $query->execute();
+	public function getAllTopics()
+	{
+	    $sql = "SELECT 
+	                topics.*,
+	                votes.count
+	            FROM topics INNER JOIN votes ON (
+	                votes.topic_id = topics.id
+	            )
+	            ORDER BY votes.count DESC, topics.title ASC";
 
-        return $query;
-    }
+	    $query = \Suggestotron\Db::getInstance()->prepare($sql);
+	    $query->execute();
+	    return $query;
+	}
 
     public function getTopic($id)
 	{
@@ -40,6 +47,25 @@ class Topics {
 	        ':description' => $data['description']
 	    ];
 
+	    $query->execute($data);
+
+	    // Grab the newly created topic ID
+	    $id = \Suggestotron\Db::getInstance()->lastInsertId();
+
+	    // Add empty vote row
+	    $sql = "INSERT INTO votes (
+	                topic_id,
+	                count
+	            ) VALUES (
+	                :id,
+	                0
+	            )";
+
+	    $data = [
+	        ':id' => $id
+	    ];
+
+	    $query = \Suggestotron\Db::getInstance()->prepare($sql);
 	    $query->execute($data);
 	}
 
@@ -74,7 +100,16 @@ class Topics {
 	        ':id' => $id,
 	    ];
 
-	    return $query->execute($data);
+	    $result = $query->execute($data);
+
+		if (!$result) {
+		   return false;
+		}
+
+		$sql = "DELETE FROM votes WHERE topic_id = :id";
+		$query = \Suggestotron\Db::getInstance()->prepare($sql);
+
+		return $query->execute($data);
 	}
 }
 ?>
