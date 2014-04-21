@@ -25,18 +25,26 @@ if ($topic === false) {
     exit;
 }
 ?>
-<h2>Edit Topic</h2>
-<form action="edit.php" method="POST">
-    <label>
-        Title: <input type="text" name="title" value="<?=$topic['title'];?>">
-    </label>
-    <br>
-    <label>
-        Description:
-        <br>
-        <textarea name="description" cols="50" rows="20"><?=$topic['description'];?></textarea>
-    </label>
-    <br>
-    <input type="hidden" name="id" value="<?=$topic['id'];?>">
-    <input type="submit" value="Edit Topic">
-</form>
+<!doctype html>
+<html>
+    <head>
+        <title>Suggestotron</title>
+    </head>
+    <body>
+        <h2>Edit Topic</h2>
+        <form action="edit.php" method="POST">
+            <label>
+                Title: <input type="text" name="title" value="<?=$topic['title'];?>">
+            </label>
+            <br>
+            <label>
+                Description:
+                <br>
+                <textarea name="description" cols="50" rows="20"><?=$topic['description'];?></textarea>
+            </label>
+            <br>
+            <input type="hidden" name="id" value="<?=$topic['id'];?>">
+            <input type="submit" value="Edit Topic">
+        </form>
+    </body>
+</html>
