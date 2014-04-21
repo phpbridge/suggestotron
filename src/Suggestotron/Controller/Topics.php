@@ -7,7 +7,7 @@ class Topics  extends \Suggestotron\Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->data = new \Suggestotron\TopicData();
+        $this->data = new \Suggestotron\Model\Topics();
     }
 
     public function listAction($options) {
