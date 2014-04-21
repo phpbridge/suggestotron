@@ -11,6 +11,8 @@ $topics = $data->getAllTopics();
     <head>
         <title>Suggestotron</title>
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <script type="text/javascript" src="/js/jquery-2.1.0.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-default" role="navigation">
@@ -45,7 +47,7 @@ $topics = $data->getAllTopics();
                         <div class="col-xs-4">
                             <p class="pull-right">
                                 <a href="/edit.php?id=<?=$topic['id']; ?>" class="btn btn-primary">Edit</a>
-                                <a href="/delete.php?id=<?=$topic['id']; ?>" class="btn btn-danger">Delete</a>
+                                <a href="/delete.php?id=<?=$topic['id']; ?>" class="btn btn-danger" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-title="Are you sure?" data-content=" This cannot be undone!">Delete</a>
                             </p>
                         </div>
                     </div>
@@ -55,5 +57,8 @@ $topics = $data->getAllTopics();
             }
             ?>
         </div>
+        <script type="text/javascript">
+            $('[data-toggle="popover"]').popover();
+        </script>
     </body>
 </html>
