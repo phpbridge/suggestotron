@@ -1,5 +1,5 @@
 <?php
-require_once '../src/Suggestotron/TopicData.php';
+require '../src/Suggestotron/Autoloader.php';
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo "You did not pass in an ID.";

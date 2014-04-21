@@ -1,6 +1,5 @@
 <?php
-require '../src/Suggestotron/TopicData.php';
-require '../src/Suggestotron/Template.php';
+require '../src/Suggestotron/Autoloader.php';
 
 $data = new \Suggestotron\TopicData();
 $data->connect();
