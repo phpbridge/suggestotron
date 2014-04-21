@@ -4,17 +4,19 @@ namespace Suggestotron\Controller;
 class Topics {
     protected $data;
     protected $template;
-
+    protected $config;
+    
     public function __construct()
     {
+        $this->config = \Suggestotron\Config::get('site');
         $this->data = new \Suggestotron\TopicData();
-        $this->template = new \Suggestotron\Template("../views/base.phtml");
+        $this->template = new \Suggestotron\Template($this->config['view_path'] . "/base.phtml");
     }
 
     public function listAction() {
         $topics = $this->data->getAllTopics();
 
-        $this->template->render("../views/index/list.phtml", ['topics' => $topics]);
+        $this->render("index/list.phtml", ['topics' => $topics]);
     }
 
     public function addAction()
@@ -25,7 +27,7 @@ class Topics {
             exit;
         }
 
-        $this->template->render("../views/index/add.phtml");
+        $this->render("index/add.phtml");
     }
 
     public function editAction()
@@ -51,7 +53,7 @@ class Topics {
             exit;
         }
 
-        $this->template->render("../views/index/edit.phtml", ['topic' => $topic]);
+        $this->render("index/edit.phtml", ['topic' => $topic]);
     }
 
     public function deleteAction()
@@ -74,6 +76,11 @@ class Topics {
         } else {
             echo "An error occurred";
         }
+    }
+
+    protected function render($template, $data = array())
+    {
+        $this->template->render($this->config['view_path'] . "/" . $template, $data);
     }
 }
 ?>
